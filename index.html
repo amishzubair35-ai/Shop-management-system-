@@ -2,61 +2,670 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dukan Hisab Pro</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amish Hub Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f8;
+    color: #19192b;
+    padding-bottom: 100px;
+}
+
+/* HEADER */
+
+.header {
+    padding: 30px 25px 35px;
+    background: #f5f5f8;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 75px;
+}
+
+.topbar span {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand h1 {
+    font-size: 43px;
+    font-weight: 800;
+}
+
+.brand p {
+    font-size: 53px;
+    color: #92919e;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.edit {
+    width: 75px;
+    height: 75px;
+    background: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 27px;
+    box-shadow: 0 5px 20px #ddd;
+}
+
+/* SALES */
+
+.sales-section {
+    background: white;
+    padding: 30px 25px 0;
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-head h3,
+.heading {
+    font-size: 17px;
+    letter-spacing: 2px;
+    color: #93929f;
+}
+
+.month {
+    border: none;
+    background: #f5f5f8;
+    padding: 15px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.graph {
+    height: 250px;
+    margin-top: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.graph svg {
+    width: 100%;
+    height: 100%;
+}
+
+.graph-line {
+    stroke: #625de3;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+}
+
+.graph-fill {
+    fill: url(#gradient);
+}
+
+/* MAIN CONTENT */
+
+.main {
+    padding: 35px 25px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 28px;
+    padding: 28px;
+    min-height: 190px;
+    box-shadow: 0 5px 20px #e9e9ed;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: block;
+    margin-bottom: 35px;
+}
+
+.blue {
+    background: #625de3;
+}
+
+.purple {
+    background: #b05be5;
+}
+
+.stat-card p {
+    font-size: 17px;
+    color: #92919e;
+    margin-bottom: 17px;
+}
+
+.stat-card h2 {
+    font-size: 32px;
+}
+
+/* QUICK ACTIONS */
+
+.heading {
+    margin: 52px 0 25px;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.action-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 15px;
+    background: white;
+    border-radius: 25px;
+    min-height: 110px;
+    box-shadow: 0 5px 18px #e9e9ed;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.action-icon {
+    min-width: 65px;
+    height: 65px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    font-size: 29px;
+}
+
+.action-card strong {
+    font-size: 16px;
+}
+
+.i-blue {
+    background: #eeeeff;
+    color: #625de3;
+}
+
+.i-orange {
+    background: #fff1e4;
+    color: #e49a43;
+}
+
+.i-red {
+    background: #ffeded;
+    color: #e45a60;
+}
+
+.i-purple {
+    background: #f0edff;
+    color: #9261d9;
+}
+
+/* LOW STOCK BADGE */
+
+.warning {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 78px;
+    background: #ed4350;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 9px;
+    font-size: 13px;
+}
+
+/* OTHER CARD */
+
+.orders {
+    margin-top: 28px;
+    background: #19192d;
+    color: white;
+    border-radius: 30px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.orders-icon {
+    background: #34344c;
+    padding: 18px;
+    border-radius: 18px;
+    font-size: 25px;
+}
+
+.orders h3 {
+    font-size: 20px;
+}
+
+.orders p {
+    color: #aaaabd;
+    margin-top: 7px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fffaff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 10px 20px;
+    box-shadow: 0 -5px 20px #e9e5ef;
+    z-index: 10;
+}
+
+.nav-item {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    color: #575468;
+    padding: 13px 15px;
+    border-radius: 23px;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    background: #d9cef5;
+    color: #62548d;
+    padding: 15px 25px;
+}
+
+.qr {
+    background: #d9cef5;
+    border-radius: 25px;
+    padding: 17px;
+}
+
+/* POPUP */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0008;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 28px;
+    border-radius: 25px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: #625de3;
+    color: white;
+    font-size: 17px;
+    border-radius: 13px;
+}
+
+.close {
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media(max-width: 380px) {
+    .brand h1 {font-size: 35px;}
+    .brand p {font-size: 43px;}
+    .stat-card {padding: 20px;}
+    .action-card {gap: 9px;padding: 13px 9px;}
+    .action-icon {min-width: 48px;height: 52px;}
+    .action-card strong {font-size: 14px;}
+}
+</style>
 </head>
+
 <body>
 
-  <header class="header">
-    <h1>Dukan Hisab Pro</h1>
-    <p>Smart Shop Management System</p>
-  </header>
+<!-- HEADER -->
 
-  <main>
-    <section class="card">
-      <h2>Shop Dashboard</h2>
-      <p>Welcome, Shopkeeper!</p>
-    </section>
+<header class="header">
 
-    <section class="card">
-      <h3>Today's Sales</h3>
-      <h2 id="sales">Rs. 0</h2>
-    </section>
+    <div class="topbar">
+        <span onclick="alert('Menu opened')">☰</span>
+        <span onclick="alert('Search opened')">⌕</span>
+    </div>
 
-    <section class="card">
-      <h3>Today's Expenses</h3>
-      <h2 id="expenses">Rs. 0</h2>
-    </section>
+    <div class="brand">
+        <div>
+            <h1>Amish</h1>
+            <p>Hub</p>
+        </div>
 
-    <section class="card">
-      <h3>Customer Udhaar</h3>
-      <h2 id="udhaar">Rs. 0</h2>
-    </section>
+        <button class="edit" onclick="editBrand()">✎</button>
+    </div>
 
-    <section class="card">
-      <h2>Add New Sale</h2>
-      <input type="number" id="saleAmount"
-        placeholder="Enter sale amount">
-      <button onclick="addSale()">Save Sale</button>
-    </section>
+</header>
 
-    <section class="card">
-      <h2>Add Expense</h2>
-      <input type="number" id="expenseAmount"
-        placeholder="Enter expense amount">
-      <button onclick="addExpense()">Save Expense</button>
-    </section>
+<!-- MONTHLY SALES -->
 
-    <section class="card">
-      <h2>Add Customer Udhaar</h2>
-      <input type="number" id="udhaarAmount"
-        placeholder="Enter udhaar amount">
-      <button onclick="addUdhaar()">Save Udhaar</button>
-    </section>
-  </main>
+<section class="sales-section">
 
-  <script src="script.js"></script>
+    <div class="section-head">
+        <h3>MONTHLY SALES</h3>
+
+        <select class="month" id="month">
+            <option>November 2026</option>
+            <option>October 2026</option>
+            <option>September 2026</option>
+        </select>
+    </div>
+
+    <div class="graph">
+        <svg viewBox="0 0 600 230" preserveAspectRatio="none">
+
+            <defs>
+                <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#625de3" stop-opacity=".12"/>
+                    <stop offset="100%" stop-color="#625de3" stop-opacity="0"/>
+                </linearGradient>
+            </defs>
+
+            <path class="graph-fill"
+            d="M0 90 L150 90 L300 90 L450 90 L600 90 L600 230 L0 230 Z"/>
+
+            <path class="graph-line"
+            d="M0 90 L150 90 L300 90 L450 90 L600 90"/>
+
+            <circle cx="600" cy="90" r="8"
+            fill="white" stroke="#625de3" stroke-width="4"/>
+
+        </svg>
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<main class="main">
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <span class="dot blue"></span>
+            <p>Today's Sales</p>
+            <h2 id="todaySales">₹0</h2>
+        </div>
+
+        <div class="stat-card">
+            <span class="dot purple"></span>
+            <p>This Week</p>
+            <h2 id="weekSales">₹0</h2>
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+
+    <h3 class="heading">QUICK ACTIONS</h3>
+
+    <div class="actions">
+
+        <button class="action-card" onclick="openModal('add')">
+            <span class="action-icon i-blue">＋</span>
+            <strong>Add Item</strong>
+        </button>
+
+        <button class="action-card" onclick="openModal('update')">
+            <span class="action-icon i-orange">✎</span>
+            <strong>Update Item</strong>
+        </button>
+
+        <button class="action-card warning" onclick="showLowStock()">
+            <span class="action-icon i-red">⚠</span>
+            <span class="badge" id="lowCount">0</span>
+            <strong>Low Stock</strong>
+        </button>
+
+        <button class="action-card" onclick="showInventory()">
+            <span class="action-icon i-purple">▣</span>
+            <strong>Inventory</strong>
+        </button>
+
+    </div>
+
+    <div class="orders" onclick="alert('Order Bill section')">
+        <span class="orders-icon">▤</span>
+        <div>
+            <h3>Create Bill</h3>
+            <p>Manage your customer bills</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+    <button class="nav-item active" onclick="setTab(this,'Home')">
+        🏠
+    </button>
+
+    <button class="nav-item" onclick="setTab(this,'Orders')">
+        ▤
+    </button>
+
+    <button class="nav-item" onclick="showInventory();setTab(this,'Inventory')">
+        ▣
+    </button>
+
+    <button class="nav-item" onclick="setTab(this,'Reports')">
+        ▥
+    </button>
+
+    <button class="nav-item qr" onclick="alert('QR Scanner')">
+        ▦
+    </button>
+
+</nav>
+
+<!-- ADD ITEM POPUP -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">×</span>
+
+        <h2 id="modalTitle">Add New Item</h2>
+
+        <input type="text" id="itemName" placeholder="Item Name">
+
+        <input type="number" id="itemPrice" placeholder="Item Price">
+
+        <input type="number" id="itemQty" placeholder="Quantity">
+
+        <button class="save-btn" onclick="saveItem()">Save Item</button>
+
+    </div>
+
+</div>
+
+<script>
+
+let inventory = [];
+let mode = "add";
+
+function openModal(type) {
+
+    mode = type;
+
+    document.getElementById("modalTitle").innerText =
+    type === "add" ? "Add New Item" : "Update Item";
+
+    document.getElementById("modal").style.display = "flex";
+
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function saveItem() {
+
+    let name = document.getElementById("itemName").value;
+    let price = Number(document.getElementById("itemPrice").value);
+    let qty = Number(document.getElementById("itemQty").value);
+
+    if(!name || !price || !qty) {
+        alert("Please enter all item details");
+        return;
+    }
+
+    if(mode === "add") {
+
+        inventory.push({
+            name: name,
+            price: price,
+            qty: qty
+        });
+
+        alert("Item Added Successfully!");
+
+    } else {
+
+        let item = inventory.find(
+            x => x.name.toLowerCase() === name.toLowerCase()
+        );
+
+        if(item) {
+            item.price = price;
+            item.qty = qty;
+            alert("Item Updated Successfully!");
+        } else {
+            alert("Item not found!");
+            return;
+        }
+
+    }
+
+    document.getElementById("itemName").value = "";
+    document.getElementById("itemPrice").value = "";
+    document.getElementById("itemQty").value = "";
+
+    closeModal();
+    updateLowStock();
+
+}
+
+function updateLowStock() {
+
+    let count = inventory.filter(x => x.qty <= 5).length;
+
+    document.getElementById("lowCount").innerText = count;
+
+}
+
+function showInventory() {
+
+    if(inventory.length === 0) {
+        alert("Your inventory is empty!");
+        return;
+    }
+
+    let output = inventory.map(x =>
+        x.name + " | ₹" + x.price + " | Stock: " + x.qty
+    ).join("\n");
+
+    alert(output);
+
+}
+
+function showLowStock() {
+
+    let low = inventory.filter(x => x.qty <= 5);
+
+    if(low.length === 0) {
+        alert("No low stock items!");
+        return;
+    }
+
+    alert(low.map(x => x.name + " - " + x.qty + " remaining").join("\n"));
+
+}
+
+function setTab(element, name) {
+
+    document.querySelectorAll(".nav-item").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    if(name !== "Home" && name !== "Inventory") {
+        alert(name + " Section");
+    }
+
+}
+
+function editBrand() {
+    let name = prompt("Enter your store name:", "Amish Hub");
+
+    if(name) {
+        let words = name.trim().split(" ");
+
+        document.querySelector(".brand h1").innerText = words[0];
+        document.querySelector(".brand p").innerText =
+        words.slice(1).join(" ");
+    }
+}
+
+</script>
+
 </body>
 </html>
