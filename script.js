@@ -1,16 +1,18 @@
 
+// Dukan Hisab Pro
+
 let sales = Number(localStorage.getItem("sales")) || 0;
 let expenses = Number(localStorage.getItem("expenses")) || 0;
 let udhaar = Number(localStorage.getItem("udhaar")) || 0;
 
 function updateDashboard() {
-  document.getElementById("sales").innerText =
+  document.getElementById("sales").textContent =
     "Rs. " + sales.toLocaleString("en-PK");
 
-  document.getElementById("expenses").innerText =
+  document.getElementById("expenses").textContent =
     "Rs. " + expenses.toLocaleString("en-PK");
 
-  document.getElementById("udhaar").innerText =
+  document.getElementById("udhaar").textContent =
     "Rs. " + udhaar.toLocaleString("en-PK");
 
   localStorage.setItem("sales", sales);
@@ -19,7 +21,9 @@ function updateDashboard() {
 }
 
 function addSale() {
-  let amount = Number(document.getElementById("saleAmount").value);
+  const amount = Number(
+    document.getElementById("saleAmount").value
+  );
 
   if (!Number.isFinite(amount) || amount <= 0) {
     alert("Please enter a valid sale amount");
@@ -33,7 +37,9 @@ function addSale() {
 }
 
 function addExpense() {
-  let amount = Number(document.getElementById("expenseAmount").value);
+  const amount = Number(
+    document.getElementById("expenseAmount").value
+  );
 
   if (!Number.isFinite(amount) || amount <= 0) {
     alert("Please enter a valid expense amount");
@@ -47,7 +53,9 @@ function addExpense() {
 }
 
 function addUdhaar() {
-  let amount = Number(document.getElementById("udhaarAmount").value);
+  const amount = Number(
+    document.getElementById("udhaarAmount").value
+  );
 
   if (!Number.isFinite(amount) || amount <= 0) {
     alert("Please enter a valid udhaar amount");
@@ -61,4 +69,3 @@ function addUdhaar() {
 }
 
 updateDashboard();
-
