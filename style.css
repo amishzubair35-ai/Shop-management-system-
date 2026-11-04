@@ -1,0 +1,35 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 18px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f4;
+  color: #183b32;
+}
+
+.header {
+  background: #123b32;
+  color: white;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.header h1 {
+  margin: 0 0 10px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 16px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #00000010;
+}
+
+.card h2 {
+  color: #123b32;
+}
